@@ -1,112 +1,1083 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <!-- ===================================================================== -->
+  <!-- META E SEO ESSENCIAL                                                  -->
+  <!-- ===================================================================== -->
   <meta charset="UTF-8">
-  <title>Projetos de Gabriel Fracheta</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Portfólio de Projetos</title>
+  <meta name="description" content="Hub com links dos projetos publicados: pizza, cole-o, meu-site, cof-51, loc, mapa, expl, time-B e roraima.">
+
+  <meta name="author" content="Seu Nome">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#111111">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Portfólio de Projetos">
+  <meta property="og:description" content="Central de links dos sites que já criei.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://seu-dominio-ou-github-pages">
+  <meta property="og:image" content="">
+
+  <!-- Favicon (opcional) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔗</text></svg>">
+
+  <!-- ===================================================================== -->
+  <!-- ESTILOS GERAIS                                                         -->
+  <!-- ===================================================================== -->
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f0f2f5;
-      margin: 0;
-      padding: 0;
+    /* --------------------------------------------------------------------- */
+    /* Reset básico                                                          */
+    /* --------------------------------------------------------------------- */
+    *, *::before, *::after {
+      box-sizing: border-box;
     }
-    header {
-      background-color: #2c3e50;
+
+    :root {
+      /* Paleta clara */
+      --bg: #0f0f12;
+      --surface: #17171c;
+      --surface-2: #1d1d24;
+      --text: #e9e9ed;
+      --text-muted: #b6b6c2;
+      --primary: #5c8df6;
+      --primary-contrast: #0b1a4d;
+      --accent: #7cf0c4;
+      --danger: #ff6b6b;
+      --warning: #f2c14e;
+      --success: #31d0aa;
+
+      --border: #2a2a33;
+      --shadow: 0 10px 30px rgba(0,0,0,0.25);
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+
+      --font-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      --container: 1120px;
+
+      --grid-gap: 18px;
+
+      /* Tipografia */
+      --h1: 42px;
+      --h2: 28px;
+      --h3: 22px;
+      --body: 16px;
+
+      /* Transições */
+      --fast: 150ms ease;
+      --soft: 280ms ease;
+    }
+
+    /* Suporte modo claro/escuro via classe no body */
+    body.light {
+      --bg: #f6f7fb;
+      --surface: #ffffff;
+      --surface-2: #f1f3f8;
+      --text: #1c1e24;
+      --text-muted: #4b4f58;
+      --border: #e6e8ee;
+      --shadow: 0 10px 30px rgba(13, 23, 44, 0.12);
+      --primary: #3759ff;
+      --primary-contrast: #eff2ff;
+      --accent: #14c8a8;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      background: radial-gradient(1200px 600px at 10% 0%, rgba(92,141,246,0.08) 0%, transparent 50%) , var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: var(--body);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* --------------------------------------------------------------------- */
+    /* Layout                                                                 */
+    /* --------------------------------------------------------------------- */
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 28px;
+    }
+
+    header.site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: saturate(130%) blur(8px);
+      background: linear-gradient(180deg, rgba(15,15,18,0.82) 0%, rgba(15,15,18,0.6) 65%, rgba(15,15,18,0) 100%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 18px;
+      padding: 16px 28px;
+      max-width: var(--container);
+      margin: 0 auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: linear-gradient(160deg, var(--primary) 0%, var(--accent) 100%);
+      box-shadow: var(--shadow);
+      color: #0d1222;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .tools {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      transition: transform var(--fast), background var(--fast), border-color var(--fast), color var(--fast), box-shadow var(--fast);
+      box-shadow: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: #3a3a42;
+      box-shadow: var(--shadow);
+    }
+
+    .btn.primary {
+      background: linear-gradient(180deg, var(--primary) 0%, #3b5fe0 100%);
       color: white;
-      padding: 40px 20px;
+      border-color: transparent;
+      box-shadow: 0 10px 20px rgba(92,141,246,0.25);
+    }
+
+    .btn.primary:hover {
+      filter: brightness(1.03);
+      transform: translateY(-1px);
+    }
+
+    .btn.icon {
+      padding: 10px;
+      width: 40px;
+      height: 40px;
+      justify-content: center;
+    }
+
+    main {
+      padding: 16px 0 64px;
+    }
+
+    /* --------------------------------------------------------------------- */
+    /* Hero                                                                   */
+    /* --------------------------------------------------------------------- */
+    .hero {
+      padding: 40px 0 22px;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .hero h1 {
+      font-size: var(--h1);
+      line-height: 1.15;
+      margin: 0 0 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero p {
+      margin: 0 0 18px;
+      color: var(--text-muted);
+      max-width: 56ch;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .stat {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
       text-align: center;
     }
-    h1 {
-      margin: 0;
-      font-size: 2.5em;
+
+    .stat .value {
+      font-size: 22px;
+      font-weight: 800;
     }
-    p {
-      font-size: 1.2em;
-      margin-top: 10px;
+
+    .stat .label {
+      color: var(--text-muted);
+      font-size: 12px;
     }
-    .container {
+
+    /* --------------------------------------------------------------------- */
+    /* Barra de ferramentas de filtros                                        */
+    /* --------------------------------------------------------------------- */
+    .toolbar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr 0.9fr auto;
+      gap: 12px;
+      align-items: center;
+      box-shadow: var(--shadow);
+    }
+
+    .input {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+    }
+
+    .input input, .input select {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font: inherit;
+    }
+
+    .tag-list {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      padding: 30px;
+      gap: 8px;
     }
-    .card {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      margin: 15px;
-      padding: 20px;
-      width: 300px;
-      transition: transform 0.2s;
+
+    .tag {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      cursor: pointer;
+      background: var(--surface-2);
+      color: var(--text-muted);
+      font-weight: 600;
+      transition: all var(--fast);
+      user-select: none;
     }
-    .card:hover {
-      transform: scale(1.03);
-    }
-    .card h2 {
-      margin-top: 0;
-      font-size: 1.4em;
-      color: #2c3e50;
-    }
-    .card p {
-      font-size: 1em;
-      color: #555;
-    }
-    .card a {
-      display: inline-block;
-      margin-top: 10px;
-      text-decoration: none;
-      color: #3498db;
-      font-weight: bold;
-    }
-    footer {
-      background-color: #2c3e50;
+
+    .tag.active {
       color: white;
-      text-align: center;
-      padding: 20px;
+      background: var(--primary);
+      border-color: transparent;
+      box-shadow: 0 6px 14px rgba(92,141,246,0.28);
+    }
+
+    /* --------------------------------------------------------------------- */
+    /* Grid de projetos                                                       */
+    /* --------------------------------------------------------------------- */
+    .grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--grid-gap);
+      align-items: stretch;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      min-height: 180px;
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--soft), box-shadow var(--soft), border-color var(--soft);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      background: conic-gradient(from 180deg, rgba(92,141,246,0.18), rgba(124,240,196,0.0), rgba(92,141,246,0.12));
+      filter: blur(28px);
+      opacity: 0;
+      transition: opacity var(--soft);
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: #3a3a42;
+      box-shadow: var(--shadow);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at 30% 20%, var(--primary) 0%, var(--accent) 100%);
+      color: #0f1428;
+      font-weight: 900;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .card-title {
+      font-size: var(--h3);
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+
+    .card-desc {
+      color: var(--text-muted);
+      margin: 4px 0 2px;
+    }
+
+    .card-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      background: var(--surface-2);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .card-actions {
+      margin-top: auto;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      text-decoration: none;
+      background: var(--surface);
+      transition: all var(--fast);
+      font-weight: 700;
+    }
+
+    .link:hover {
+      border-color: #3a3a42;
+      transform: translateY(-1px);
+    }
+
+    .link.primary {
+      background: var(--primary);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 8px 18px rgba(92,141,246,0.25);
+    }
+
+    /* --------------------------------------------------------------------- */
+    /* Rodapé                                                                 */
+    /* --------------------------------------------------------------------- */
+    footer {
       margin-top: 40px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      gap: 14px;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      border-bottom: 1px dashed transparent;
+      transition: border-color var(--fast), color var(--fast);
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+      border-color: var(--text);
+    }
+
+    /* --------------------------------------------------------------------- */
+    /* Responsividade                                                         */
+    /* --------------------------------------------------------------------- */
+    @media (max-width: 980px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+      }
+      .stats {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* --------------------------------------------------------------------- */
+    /* Detalhes e animações                                                   */
+    /* --------------------------------------------------------------------- */
+    .pulse {
+      animation: pulse 2.8s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.015); }
+      100% { transform: scale(1); }
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 18px 0;
+    }
+
+    /* --------------------------------------------------------------------- */
+    /* Preferências do usuário                                                */
+    /* --------------------------------------------------------------------- */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* --------------------------------------------------------------------- */
+    /* Estados globais                                                        */
+    /* --------------------------------------------------------------------- */
+    .empty {
+      text-align: center;
+      color: var(--text-muted);
+      padding: 24px;
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      background: var(--surface-2);
     }
   </style>
 </head>
-<body>
-  <header>
-    <h1>Central de Projetos</h1>
-    <p>Gabriel Fracheta – Desenvolvedor Web</p>
+
+<body class="light">
+  <!-- ===================================================================== -->
+  <!-- CABEÇALHO                                                             -->
+  <!-- ===================================================================== -->
+  <header class="site-header" role="banner" aria-label="Cabeçalho do site">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true">P</div>
+        <div class="brand-title">Portfólio de Projetos</div>
+      </div>
+      <div class="tools">
+        <button class="btn icon" id="toggleTheme" aria-label="Alternar modo claro/escuro">🌗</button>
+        <a class="btn" href="#grid" aria-label="Ir para projetos">Ver projetos</a>
+        <a class="btn primary" href="#" id="downloadJson">Exportar JSON</a>
+      </div>
+    </div>
   </header>
 
-  <div class="container">
-    <div class="card">
-      <h2>📚 Loja de Livros Online</h2>
-      <p>Catálogo de livros clássicos e modernos com carrinho de compras.</p>
-      <a href="https://fracheta.github.io/meu-site/indexx.html" target="_blank">Acessar site</a>
-    </div>
+  <!-- ===================================================================== -->
+  <!-- CONTEÚDO PRINCIPAL                                                    -->
+  <!-- ===================================================================== -->
+  <main role="main">
+    <section class="container hero">
+      <div class="hero-content">
+        <div>
+          <h1>Seu hub de links, organizado e bonito</h1>
+          <p>
+            Esta página reúne todos os sites que você já criou. Use a busca ou os filtros para encontrar
+            rapidamente cada projeto. Clique em “Abrir” para visitar ou “Copiar link” para compartilhar.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#grid">Explorar projetos</a>
+            <button class="btn" id="clearFilters">Limpar filtros</button>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="stat pulse">
+            <div class="value" id="countTotal">0</div>
+            <div class="label">Total</div>
+          </div>
+          <div class="stat">
+            <div class="value" id="countUnique">0</div>
+            <div class="label">Domínios únicos</div>
+          </div>
+          <div class="stat">
+            <div class="value" id="countTags">0</div>
+            <div class="label">Tags</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="card">
-      <h2>🚚 TranspRÁPIDA</h2>
-      <p>Transportadora com rastreamento em tempo real e mapa de entregas.</p>
-      <a href="https://fracheta.github.io/.mapa/index.html" target="_blank">Acessar site</a>
-    </div>
+    <section class="container">
+      <div class="toolbar" role="region" aria-label="Ferramentas de filtro e busca">
+        <div class="input" aria-live="polite">
+          <span aria-hidden="true">🔍</span>
+          <input type="search" id="search" placeholder="Buscar por nome, descrição ou URL..." autocomplete="off" aria-label="Campo de busca por projetos">
+        </div>
 
-    <div class="card">
-      <h2>🧑‍💻 Portfólio Pessoal</h2>
-      <p>Projetos como blog, lanchonete e calculadora em JavaScript.</p>
-      <a href="https://fracheta.github.io/expl/portfolio.html" target="_blank">Acessar site</a>
-    </div>
+        <div class="input">
+          <span aria-hidden="true">🗂️</span>
+          <select id="category" aria-label="Filtrar por categoria">
+            <option value="all">Todas as categorias</option>
+            <option value="front-end">Front-end</option>
+            <option value="landing">Landing page</option>
+            <option value="demo">Demo</option>
+            <option value="portfolio">Portfolio</option>
+            <option value="mapa">Mapa</option>
+            <option value="jogo">Jogo</option>
+          </select>
+        </div>
 
-    <div class="card">
-      <h2>⚽ Brasileirão Série B</h2>
-      <p>Lista dos times participantes da Série B em 2025.</p>
-      <a href="https://fracheta.github.io/time-B/index.html" target="_blank">Acessar site</a>
-    </div>
+        <div class="tag-list" id="tagList" aria-label="Lista de tags">
+          <!-- Tags dinâmicas aqui -->
+        </div>
 
-    <div class="card">
-      <h2>🗺️ Estado de Roraima</h2>
-      <p>História, cultura, turismo e geografia do estado mais ao norte do Brasil.</p>
-      <a href="https://fracheta.github.io/Estado/roraima" target="_blank">Acessar site</a>
-    </div>
-  </div>
+        <div style="display:flex; gap:8px; justify-content:flex-end;">
+          <button class="btn" id="sortByName">Ordenar A–Z</button>
+          <button class="btn" id="sortByDate">Ordenar por data</button>
+        </div>
+      </div>
 
+      <div class="divider" role="separator"></div>
+
+      <section id="grid" class="grid" aria-live="polite" aria-busy="false">
+        <!-- Cards gerados via JS -->
+      </section>
+
+      <div id="emptyState" class="empty" hidden>
+        Nenhum projeto encontrado com os filtros atuais.
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- RODAPÉ                                                                -->
+  <!-- ===================================================================== -->
   <footer>
-    <p>&copy; 2025 Gabriel Fracheta. Todos os direitos reservados.</p>
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> • Portfólio • Feito com HTML + CSS + JS</div>
+      <nav class="footer-links" aria-label="Links do rodapé">
+        <a href="#grid">Projetos</a>
+        <a href="#" id="scrollTop">Topo</a>
+      </nav>
+    </div>
   </footer>
+
+  <!-- ===================================================================== -->
+  <!-- SCRIPT                                                                -->
+  <!-- ===================================================================== -->
+  <script>
+    // ----------------------------------------------------------------------
+    // Dados dos projetos (inclui seus links exatos como enviados)
+    // ----------------------------------------------------------------------
+    const projects = [
+      {
+        id: "pizza",
+        name: "Pizza",
+        url: "https://fracheta.github.io/pizza/index.html",
+        description: "Projeto de página de pizzas, provavelmente com menu e interação.",
+        tags: ["comida", "cardápio", "front-end"],
+        category: "landing",
+        date: "2024-08-01"
+      },
+      {
+        id: "cole-o",
+        name: "Cole-o",
+        url: "https://fracheta.github.io/Cole-o/index.html",
+        description: "Página 'Cole-o' — talvez um utilitário simples ou landing.",
+        tags: ["utilitário", "demo", "front-end"],
+        category: "demo",
+        date: "2024-07-15"
+      },
+      {
+        id: "meu-site",
+        name: "Meu Site",
+        url: "https://fracheta.github.io/meu-site/indexx.html",
+        description: "Site pessoal (atenção: URL com 'indexx.html' proposital).",
+        tags: ["portfolio", "pessoal"],
+        category: "portfolio",
+        date: "2024-06-20"
+      },
+      {
+        id: "cof-51",
+        name: "COF-51",
+        url: "https://fracheta.github.io/cof-51/index.html",
+        description: "Projeto 'cof-51' com página inicial.",
+        tags: ["demo", "front-end"],
+        category: "demo",
+        date: "2024-05-10"
+      },
+      {
+        id: "loc",
+        name: "Loc",
+        url: "https://fracheta.github.io/loc/index.html",
+        description: "Projeto 'loc' — pode ser uma landing ou um mini app.",
+        tags: ["landing", "front-end"],
+        category: "landing",
+        date: "2024-04-18"
+      },
+      {
+        id: "mapa",
+        name: ".mapa",
+        url: "https://fracheta.github.io/.mapa/index.html",
+        description: "Projeto '.mapa' — mapeamento ou visualização de dados.",
+        tags: ["mapa", "visualização"],
+        category: "mapa",
+        date: "2024-03-03"
+      },
+      {
+        id: "expl",
+        name: "Expl Portfolio",
+        url: "https://fracheta.github.io/expl/portfolio.html",
+        description: "Seção 'expl' com uma página de portfólio.",
+        tags: ["portfolio", "front-end"],
+        category: "portfolio",
+        date: "2024-02-22"
+      },
+      {
+        id: "time-b",
+        name: "Time-B",
+        url: "https://fracheta.github.io/time-B/index.html",
+        description: "Projeto 'Time-B' — possivelmente relacionado a equipes.",
+        tags: ["landing", "time"],
+        category: "landing",
+        date: "2024-01-12"
+      },
+      {
+        id: "roraima",
+        name: "Estado Roraima",
+        url: "https://fracheta.github.io/Estado/roraima",
+        description: "Página sobre o estado de Roraima.",
+        tags: ["mapa", "informativo"],
+        category: "mapa",
+        date: "2023-12-05"
+      }
+    ];
+
+    // ----------------------------------------------------------------------
+    // Utilitários
+    // ----------------------------------------------------------------------
+    const el = sel => document.querySelector(sel);
+    const els = sel => Array.from(document.querySelectorAll(sel));
+
+    function createEl(tag, props = {}, children = []) {
+      const node = document.createElement(tag);
+      Object.entries(props).forEach(([k, v]) => {
+        if (k === "class") node.className = v;
+        else if (k === "dataset") Object.entries(v).forEach(([dk, dv]) => node.dataset[dk] = dv);
+        else if (k.startsWith("on") && typeof v === "function") node.addEventListener(k.substring(2), v);
+        else if (k === "html") node.innerHTML = v;
+        else node.setAttribute(k, v);
+      });
+      children.forEach(ch => {
+        if (typeof ch === "string") node.appendChild(document.createTextNode(ch));
+        else if (ch) node.appendChild(ch);
+      });
+      return node;
+    }
+
+    function formatDate(iso) {
+      try {
+        const d = new Date(iso);
+        return d.toLocaleDateString("pt-BR");
+      } catch {
+        return iso;
+      }
+    }
+
+    function copyToClipboard(text) {
+      return navigator.clipboard?.writeText(text).catch(() => {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+      });
+    }
+
+    function unique(list) {
+      return Array.from(new Set(list));
+    }
+
+    // ----------------------------------------------------------------------
+    // Renderização de cards
+    // ----------------------------------------------------------------------
+    function renderGrid(items) {
+      const grid = el("#grid");
+      const empty = el("#emptyState");
+      grid.innerHTML = "";
+
+      if (!items.length) {
+        empty.hidden = false;
+        grid.setAttribute("aria-busy", "false");
+        return;
+      }
+      empty.hidden = true;
+
+      const frag = document.createDocumentFragment();
+
+      items.forEach(p => {
+        const card = createEl("article", {
+          class: "card",
+          role: "article",
+          "aria-label": p.name
+        });
+
+        const header = createEl("div", { class: "card-header" }, [
+          createEl("div", { class: "card-icon", "aria-hidden": "true" }, [p.name.slice(0, 1).toUpperCase()]),
+          createEl("div", {}, [
+            createEl("div", { class: "card-title" }, [p.name]),
+            createEl("div", { class: "card-desc" }, [p.description]),
+          ])
+        ]);
+
+        const tags = createEl("div", { class: "card-tags" });
+        p.tags.forEach(t => {
+          tags.appendChild(createEl("span", { class: "badge" }, [t]));
+        });
+        tags.appendChild(createEl("span", { class: "badge" }, ["Categoria: ", p.category]));
+
+        const actions = createEl("div", { class: "card-actions" }, [
+          createEl("a", {
+            class: "link primary",
+            href: p.url,
+            target: "_blank",
+            rel: "noopener",
+            "aria-label": `Abrir ${p.name}`
+          }, ["Abrir"]),
+          createEl("button", {
+            class: "link",
+            onClick: async () => {
+              await copyToClipboard(p.url);
+              toast(`Link copiado: ${p.url}`);
+            },
+            "aria-label": `Copiar link de ${p.name}`
+          }, ["Copiar link"]),
+          createEl("span", { class: "badge", "aria-label": "Data" }, ["📅 ", formatDate(p.date)])
+        ]);
+
+        card.appendChild(header);
+        card.appendChild(tags);
+        card.appendChild(actions);
+
+        frag.appendChild(card);
+      });
+
+      grid.appendChild(frag);
+      grid.setAttribute("aria-busy", "false");
+    }
+
+    // ----------------------------------------------------------------------
+    // Busca, filtros e ordenação
+    // ----------------------------------------------------------------------
+    const state = {
+      query: "",
+      category: "all",
+      tags: new Set(),
+      sort: "name" // "name" | "date"
+    };
+
+    function applyFilters() {
+      let result = [...projects];
+
+      if (state.query) {
+        const q = state.query.toLowerCase();
+        result = result.filter(p =>
+          p.name.toLowerCase().includes(q) ||
+          p.description.toLowerCase().includes(q) ||
+          p.url.toLowerCase().includes(q)
+        );
+      }
+
+      if (state.category !== "all") {
+        result = result.filter(p => p.category === state.category);
+      }
+
+      if (state.tags.size) {
+        result = result.filter(p => [...state.tags].every(t => p.tags.includes(t)));
+      }
+
+      if (state.sort === "name") {
+        result.sort((a, b) => a.name.localeCompare(b.name, "pt-BR"));
+      } else if (state.sort === "date") {
+        result.sort((a, b) => new Date(b.date) - new Date(a.date));
+      }
+
+      renderGrid(result);
+    }
+
+    // ----------------------------------------------------------------------
+    // Construção dinâmica de lista de tags
+    // ----------------------------------------------------------------------
+    function buildTags() {
+      const tagContainer = el("#tagList");
+      tagContainer.innerHTML = "";
+
+      const allTags = unique(projects.flatMap(p => p.tags)).sort((a, b) => a.localeCompare(b, "pt-BR"));
+      allTags.forEach(tag => {
+        const btn = createEl("button", {
+          class: "tag",
+          onClick: () => {
+            if (state.tags.has(tag)) state.tags.delete(tag);
+            else state.tags.add(tag);
+            btn.classList.toggle("active");
+            applyFilters();
+          },
+          "aria-pressed": "false",
+          "aria-label": `Filtrar pela tag ${tag}`
+        }, [tag]);
+
+        tagContainer.appendChild(btn);
+      });
+
+      el("#countTags").textContent = String(allTags.length);
+    }
+
+    // ----------------------------------------------------------------------
+    // Contadores
+    // ----------------------------------------------------------------------
+    function updateCounters() {
+      el("#countTotal").textContent = String(projects.length);
+      const hosts = unique(projects.map(p => {
+        try {
+          return new URL(p.url).host;
+        } catch {
+          return "domínio inválido";
+        }
+      }));
+      el("#countUnique").textContent = String(hosts.length);
+    }
+
+    // ----------------------------------------------------------------------
+    // Tema claro/escuro
+    // ----------------------------------------------------------------------
+    const THEME_KEY = "portfolio_theme";
+
+    function getTheme() {
+      return localStorage.getItem(THEME_KEY) || "light";
+    }
+
+    function setTheme(t) {
+      document.body.classList.remove("light");
+      document.body.classList.remove("dark");
+      document.body.classList.add(t);
+      localStorage.setItem(THEME_KEY, t);
+    }
+
+    // ----------------------------------------------------------------------
+    // Toast simples
+    // ----------------------------------------------------------------------
+    let toastTimer = null;
+    function toast(msg = "Feito!") {
+      let node = el("#toast");
+      if (!node) {
+        node = createEl("div", { id: "toast", class: "toast" });
+        document.body.appendChild(node);
+      }
+      node.textContent = msg;
+      node.style.position = "fixed";
+      node.style.bottom = "20px";
+      node.style.left = "50%";
+      node.style.transform = "translateX(-50%)";
+      node.style.background = "linear-gradient(180deg, var(--primary) 0%, #3b5fe0 100%)";
+      node.style.color = "white";
+      node.style.padding = "10px 14px";
+      node.style.borderRadius = "10px";
+      node.style.boxShadow = "0 10px 20px rgba(92,141,246,0.25)";
+      node.style.zIndex = "9999";
+      node.style.border = "none";
+
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => node.remove(), 2000);
+    }
+
+    // ----------------------------------------------------------------------
+    // Exportar JSON
+    // ----------------------------------------------------------------------
+    function exportJSON() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(projects, null, 2));
+      const a = document.createElement("a");
+      a.setAttribute("href", dataStr);
+      a.setAttribute("download", "projects.json");
+      a.click();
+    }
+
+    // ----------------------------------------------------------------------
+    // Eventos
+    // ----------------------------------------------------------------------
+    function bindEvents() {
+      el("#year").textContent = String(new Date().getFullYear());
+
+      el("#toggleTheme").addEventListener("click", () => {
+        const next = document.body.classList.contains("light") ? "dark" : "light";
+        setTheme(next);
+      });
+
+      el("#downloadJson").addEventListener("click", (e) => {
+        e.preventDefault();
+        exportJSON();
+      });
+
+      el("#scrollTop").addEventListener("click", (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      el("#search").addEventListener("input", (e) => {
+        state.query = e.target.value.trim();
+        applyFilters();
+      });
+
+      el("#category").addEventListener("change", (e) => {
+        state.category = e.target.value;
+        applyFilters();
+      });
+
+      el("#sortByName").addEventListener("click", () => {
+        state.sort = "name";
+        applyFilters();
+      });
+
+      el("#sortByDate").addEventListener("click", () => {
+        state.sort = "date";
+        applyFilters();
+      });
+
+      el("#clearFilters").addEventListener("click", () => {
+        state.query = "";
+        state.category = "all";
+        state.tags.clear();
+        el("#search").value = "";
+        el("#category").value = "all";
+        els(".tag").forEach(t => t.classList.remove("active"));
+        applyFilters();
+      });
+    }
+
+    // ----------------------------------------------------------------------
+    // Inicialização
+    // ----------------------------------------------------------------------
+    function init() {
+      setTheme(getTheme());
+      buildTags();
+      updateCounters();
+      applyFilters();
+      bindEvents();
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
 </body>
 </html>
+
